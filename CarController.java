@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,7 +23,8 @@ public class CarController {
     CarView frame;
 
     // A list of cars, modify if needed
-    // ArrayList<ACar> cars = new ArrayList<>();
+    ArrayList<Cars> cars = new ArrayList<>();
+    Garage<Volvo240> volvoGarage = new Garage<>(10);
 
     //methods:
 
@@ -42,8 +44,8 @@ public class CarController {
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
+     * view to update its images. Change this method to your needs.
+     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Cars car : cars) {

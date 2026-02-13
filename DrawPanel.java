@@ -1,7 +1,9 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -14,7 +16,8 @@ public class DrawPanel extends JPanel{
     Point volvoWorkshopPoint = new Point(300,50); //x och y är övre vänstra hörnet
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
+    public DrawPanel(int x, int y, List<Cars> cars) {
+        this.cars=cars;
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
@@ -22,11 +25,12 @@ public class DrawPanel extends JPanel{
         try {
             images.put("Volvo240",ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
             volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
+            images.put("Saab95", ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
+            images.put("Scania", ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
         } catch (IOException ex)
         {
             ex.printStackTrace();
         }
-
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself

@@ -42,6 +42,7 @@ public class CarView extends JFrame{
     // Constructor
     public CarView(String framename, CarController cc){
         this.carC = cc;
+        this.drawPanel=new DrawPanel(X,Y-240, cc.cars);
         initComponents(framename);
     }
 
@@ -72,7 +73,8 @@ public class CarView extends JFrame{
                         1);//step
         gasSpinner = new JSpinner(spinnerModel);
         gasSpinner.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
+
+            public void stateChanged(ChangeEvent e){
                 gasAmount = (int) ((JSpinner)e.getSource()).getValue();
             }
         });
@@ -116,7 +118,55 @@ public class CarView extends JFrame{
             }
         });
 
-        // Make the frame pack all it's components by respecting the sizes if possible.
+        brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.brake(gasAmount);
+            }
+        });
+
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.startEngine();
+            }
+        });
+
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.stopEngine();
+            }
+        });
+
+        turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.turboOn();
+            }
+        });
+
+        turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {carC.turboOff();
+            }
+        });
+
+
+        liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {carC.raiseBed();
+            }
+        });
+
+        lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {carC.lowerBed();
+            }
+        });
+
+
+
         this.pack();
 
         // Get the computer screen resolution
