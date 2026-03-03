@@ -13,14 +13,16 @@ public class DrawPanel extends JPanel{
     private final List<Cars> cars;
     private final Map<String, BufferedImage> images = new HashMap<>();
     BufferedImage volvoWorkshopImage;
-    Point volvoWorkshopPoint = new Point(300,50); //x och y är övre vänstra hörnet
+    private final Garage garage;
+    //Point volvoWorkshopPoint = new Point(300,50); //x och y är övre vänstra hörnet
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, List<Cars> cars) {
+    public DrawPanel(int x, int y, List<Cars> cars, Garage garage) {
         this.cars=cars;
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
+        this.garage = garage;
         // Print an error message in case file is not found with a try/catch block
         try {
             images.put("Volvo240",ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
@@ -39,7 +41,7 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y,null);
+        g.drawImage(volvoWorkshopImage, garage.getGarageX(), garage.getGarageY(), null);
         int i = 0;
         for (Cars car : cars) {
             BufferedImage img = images.get(car.getModelName());
